@@ -3,14 +3,8 @@
     <table>
       <tbody>
         <tr v-for="col in state.grid">
-          <td v-for="cell in col" class="cell">
-            <div class="cell">
-              <div 
-                class="piece" 
-                :class="{ empty: cell.color === 0, black: cell.color === 1, white: cell.color === -1 }"
-                v-on:click="cell.color = curMove; curMove *= -1;"
-              ></div>
-            </div>
+          <td v-for="cell in col">
+            <Cell :state="cell" :cur-move="curMove" v-on:play="play"></Cell>
           </td>
         </tr>
       </tbody>
@@ -19,12 +13,22 @@
 </template>
 
 <script>
+import Cell from './Cell'
+
 export default {
   name: 'board',
   props: ['state'],
+  components: {
+    Cell
+  },
   data: () => {
     return {
       curMove: 1
+    }
+  },
+  methods: {
+    play: function () {
+      this.curMove *= -1
     }
   }
 }
@@ -32,45 +36,7 @@ export default {
 
 <style lang="scss">
   $blah: 'hello';
-
   
-
-  .piece {
-    width: 90%;
-    height: 90%;
-    border-radius: 100%;
-    position: absolute;
-    left: -50%;
-    top: -50%;
-    margin-left: 1px;
-    margin-top: 1px;
-    z-index: 10;
-    
-    &.black {
-      background: #333;
-      // cursor: pointer;
-    }
-
-    &.white {
-      background: #f1f1f1;
-      // cursor: pointer;
-    }
-
-    &.empty {
-      cursor: pointer;
-
-       &:hover {
-        .black & {
-          background: rgba(#333, 0.5);
-        }
-
-        .white & {
-          background: rgba(#f1f1f1, 0.5);
-        }
-      }
-    }
-  }
-
   .board {
     padding: 40px;
     padding-right: 0;
@@ -129,76 +95,4 @@ export default {
       }
     }
   }
-
-  // table {
-  //  border-collapse: collapse;
-  //  border: none;
-  //  border-spacing: 0;
-
-  //  tr {
-  //    &:first-child {
-  //      td {
-  //        &:after {
-  //          height: 50%;
-  //          top: 50%;
-  //        }
-  //      }
-  //    }
-
-  //    &:last-child {
-  //      td {
-  //        &:after {
-  //          height: 50%;
-  //          bottom: 50%;
-  //        }
-  //      }
-  //    }
-
-  //    td {
-  //      &:first-child {
-  //        &:before {
-  //          width: 50%;
-  //          left: 50%;
-  //        }
-  //      }
-
-  //      &:last-child {
-  //        &:before {
-  //          width: 50%;
-  //          right: 50%;
-  //        }
-  //      }
-  //    }
-  //  }
-
-  //  td {
-  //    width: 30px;
-  //    height: 30px;
-  //    border: none;
-
-  //    position: relative;
-
-  //    &:after {
-  //      content: " ";
-  //      display: block;
-  //      position: absolute;
-  //      width: 1px;
-  //      height: 100%;
-  //      left: 50%;
-  //      top: 0;
-  //      background: #333;
-  //    }
-
-  //    &:before {
-  //      content: " ";
-  //      display: block;
-  //      position: absolute;
-  //      width: 100%;
-  //      height: 1px;
-  //      left: 0;
-  //      top: 50%;
-  //      background: #333;
-  //    }
-  //  }
-  // }
 </style>

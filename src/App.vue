@@ -14,12 +14,10 @@ const EMPTY = 0
 const grid = [
   [ { color: EMPTY }, { color: EMPTY }, { color: EMPTY }, { color: EMPTY }, { color: EMPTY } ],
   [ { color: EMPTY }, { color: BLACK }, { color: WHITE }, { color: EMPTY }, { color: EMPTY } ],
-  [ { color: EMPTY }, { color: WHITE }, { color: BLACK }, { color: EMPTY }, { color: EMPTY } ],
+  [ { color: EMPTY }, { color: WHITE, active: true }, { color: BLACK }, { color: EMPTY }, { color: EMPTY } ],
   [ { color: EMPTY }, { color: EMPTY }, { color: WHITE }, { color: BLACK }, { color: EMPTY } ],
   [ { color: EMPTY }, { color: EMPTY }, { color: EMPTY }, { color: EMPTY }, { color: EMPTY } ]
 ]
-
-window.grid = grid
 
 export default {
   name: 'app',

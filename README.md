@@ -2,6 +2,8 @@
 
 > An SGF viewer and editor
 
+Based on the vue-cli webpack package
+
 ## Build Setup
 
 ``` bash

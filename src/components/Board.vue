@@ -1,5 +1,5 @@
 <template>
-  <div class="board">
+  <div class="board" :class="{ black: curMove === 1, white: curMove === -1 }">
     <table>
       <tbody>
         <tr v-for="col in state.grid">
@@ -8,7 +8,7 @@
               <div 
                 class="piece" 
                 :class="{ empty: cell.color === 0, black: cell.color === 1, white: cell.color === -1 }"
-                v-on:click="curMove *= -1; cell.color = curMove"
+                v-on:click="cell.color = curMove; curMove *= -1;"
               ></div>
             </div>
           </td>
@@ -58,6 +58,16 @@ export default {
 
     &.empty {
       cursor: pointer;
+
+       &:hover {
+        .black & {
+          background: rgba(#333, 0.5);
+        }
+
+        .white & {
+          background: rgba(#f1f1f1, 0.5);
+        }
+      }
     }
   }
 
